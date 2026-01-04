@@ -1,0 +1,15 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html/project  # 统一挂载点
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+
+  app:
+    image: php:8.1-fpm
+    volumes:
+      - .:/var/www/html/project  # 必须与上面完全一致
